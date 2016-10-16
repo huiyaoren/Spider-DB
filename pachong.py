@@ -12,7 +12,7 @@ class Spider:
 
 	def __init__(self):
 		self.dangdangURL = 'http://v.dangdang.com/book'
-		self.doubanURl = 'http://book.douban.com'
+		self.doubanURL = 'http://book.douban.com'
 
 
 	# 获取各活动专题链接 
@@ -47,7 +47,7 @@ class Spider:
 			session = {'sessionname': sessionname, 'sessionurl': sessionurl}
 			sessions.append(session)
 
-		# 将专题链接地址写入txt文件	
+		# 将专题链接地址写入 txt 文件	
 		writeSession_txt(sessions) 
 		
 		return sessions
@@ -81,7 +81,7 @@ class Spider:
 			# 每本书html信息用等号拆分
 			item = item.split("=")
 
-			# 书名中含有等号=会导致切分错误，懒得改直接跳过
+			# 书名中含有等号 = 会导致切分错误，直接跳过
 			if len(item) != 18:
 				continue
 
