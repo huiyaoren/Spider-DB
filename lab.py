@@ -80,7 +80,7 @@ def deleteShit(name):
 		data['dblink'] = s[6].encode('utf8')
 		datas.append(data)	
 	
-	print "afterbooks:", len(datas)
+	print("afterbooks:", len(datas))
 	return datas
 
 
