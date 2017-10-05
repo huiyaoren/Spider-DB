@@ -42,7 +42,7 @@ class Spider:
 				sessionname = item.split("\"", 10)[9].split("-",1)[1]
 				
 			else:
-				print "获取专题名出错"
+				print("获取专题名出错")
 
 			session = {'sessionname': sessionname, 'sessionurl': sessionurl}
 			sessions.append(session)
@@ -162,7 +162,7 @@ def findBook(details, bookname="中"):
 	for detail in details:
 
 		if re.findall(bookname.encode('utf8') , detail['bookname'], re.S):
-			print detail['bookname'], detail['booklink'], detail['price']
+			print(detail['bookname'], detail['booklink'], detail['price'])
 			book = detail
 			books.append(book)
 
@@ -174,34 +174,34 @@ def findBook(details, bookname="中"):
 
 spider = Spider()
 
-print "\n"
-print "获取专题链接...".encode('utf8')
+print("\n")
+print("获取专题链接...".encode('utf8'))
 slinks = spider.getSessionlink()
-print "获取到{0}个专题链接".format(len(slinks)).encode('utf8')
+print("获取到{0}个专题链接".format(len(slinks)).encode('utf8'))
 
 datas = []
 for url in slinks:
 
-	print "获取专题名...".encode('utf8')
-	print "------",url['sessionname'].encode('utf8'),"------"
+	print("获取专题名...".encode('utf8'))
+	print("------",url['sessionname'].encode('utf8'),"------")
 
-	print "获取书目...".encode('utf8')
+	print("获取书目...".encode('utf8'))
 	details = spider.getBookdetail(url['sessionurl'])
-	print "获取到{0}本书籍".format(len(details)).encode('utf8')
+	print("获取到{0}本书籍".format(len(details)).encode('utf8'))
 
 	n = 1
 	for detail in details:
 
 		#writeBook_txt(details)
 		n += 1
-		print "《{0}》".format(detail['bookname'].decode('utf8')).encode('utf8')
+		print("《{0}》".format(detail['bookname'].decode('utf8')).encode('utf8'))
 	
 		bookname = detail['bookname'].decode('utf8') # 这里有问题
 		ranks = spider.getBookrank(bookname) # 出错
 		if len(ranks) == 0:
-			print "该书尚未有人评价".encode('utf8')
+			print("该书尚未有人评价".encode('utf8'))
 			continue
-		print "￥".encode('utf8')+detail['price'], ranks[0]['bookname'], ranks[0]['rank'], ranks[0]['rankpeople'] 
+		print("￥".encode('utf8')+detail['price'], ranks[0]['bookname'], ranks[0]['rank'], ranks[0]['rankpeople'] )
 
 		data = {\
 			'ddbookname': detail['bookname'],
@@ -215,7 +215,7 @@ for url in slinks:
 datas = sorted(datas, key=lambda data:data['price'])
 datas = sorted(datas, key=lambda data:data['rank'], reverse=True)
 for data in datas:
-	print data['rank']
+	print(data['rank'])
 writeData_txt(datas)
 
 	
