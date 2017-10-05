@@ -11,14 +11,14 @@ class Spider:
 
 
 	def __init__(self):
-		self.dangdangURL = 'http://v.dangdang.com/book'
-		self.doubanURL = 'http://book.douban.com'
+		self.url_dangdang = 'http://v.dangdang.com/book'
+		self.url_douban = 'http://book.douban.com'
 
 
 	# 获取各活动专题链接 
 	def getSessionlink(self):
 		
-		request = urllib2.Request(self.dangdangURL) 
+		request = urllib2.Request(self.url_dangdang) 
 		response = urllib2.urlopen(request) # urlopen(url, data, timeout)
 		page = response.read().decode('gbk') 
 
@@ -105,7 +105,7 @@ class Spider:
 		
 		bookname = bookname.replace("，", "+").replace(" ", "+").encode('utf8') # 
 		
-		url = self.doubanURl + "/subject_search?search_text={0}&cat=1001".format(bookname.decode('utf8'))
+		url = self.url_douban + "/subject_search?search_text={0}&cat=1001".format(bookname.decode('utf8'))
 
 		# 文件头
 		user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)' 
